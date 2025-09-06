@@ -1,130 +1,134 @@
-// Produto
-class Computer {
-  constructor() {
-    this.cpu = null;
-    this.gpu = null;
-    this.ram = null;
-    this.storage = null;
-    this.powerSupply = null;
-    this.caseType = null;
-    this.os = null;
-    this.wifiCard = false;
-  }
+class Car {
+  constructor(brand, model, year, engine, color, gps) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+    this.engine = engine;
+    this.color = color;
+    this.gps = gps;
+  } 
 
   showConfig() {
     console.log(`
-    Computador configurado:
-    CPU: ${this.cpu}
-    GPU: ${this.gpu !== null ? this.gpu : "GPU integrado"}
-    RAM: ${this.ram}
-    Armazenamento: ${this.storage}
-    Fonte: ${this.powerSupply}
-    Gabinete: ${this.caseType}
-    Sistema: ${this.os}
-    Wi-Fi: ${this.wifiCard ? "Sim" : "Não"}
+    Carro selecionado:
+    Marca: ${this.brand}
+    Modelo: ${this.model}
+    Ano: ${this.year}
+    Motor: ${this.engine}
+    Cor: ${this.color}
+    GPS: ${this.gps}
     `);
   }
 }
 
 // Builder
-class ComputerBuilder {
+class CarBuilder {
   constructor() {
-    this.computer = new Computer();
+    this.car = new Car();
   }
 
-  setCPU(cpu) {
-    this.computer.cpu = cpu;
+  setBrand(brand) {
+    this.car.brand = brand;
     return this;
   }
 
-  setGPU(gpu) {
-    this.computer.gpu = gpu;
+  setModel(model) {
+    this.car.model = model;
     return this;
   }
 
-  setRAM(ram) {
-    this.computer.ram = ram;
+  setYear(year) {
+    this.car.year = year;
     return this;
   }
 
-  setStorage(storage) {
-    this.computer.storage = storage;
+  setEngine(engine) {
+    this.car.engine = engine;
     return this;
   }
 
-  setPowerSupply(power) {
-    this.computer.powerSupply = power;
+  setColor(color){
+    this.car.color = color;
     return this;
   }
-
-  setCase(caseType) {
-    this.computer.caseType = caseType;
-    return this;
-  }
-
-  setOS(os) {
-    this.computer.os = os;
-    return this;
-  }
-
-  addWifiCard() {
-    this.computer.wifiCard = true;
+  
+  setGPS(gps){
+    this.car.gps = gps;
     return this;
   }
 
   build() {
-    return this.computer;
+    return this.car;
   }
 }
 
 // Director → monta configurações pré-definidas
-class ComputerDirector {
-  static buildGamingPC() {
-    return new ComputerBuilder()
-      .setCPU("Intel i9")
-      .setGPU("NVIDIA RTX 4090")
-      .setRAM("64GB")
-      .setStorage("2TB SSD")
-      .setPowerSupply("1000W")
-      .setCase("Full Tower")
-      .setOS("Windows 11 Pro")
-      .addWifiCard()
+class CarDirector {
+  static buildDreamCar() {
+    return new CarBuilder()
+      .setBrand("Ferrari")
+      .setModel("SF90 Stradale")
+      .setYear("2025")
+      .setEngine("V8 Híbrido 1000cv")
+      .setColor("Rosso Corsa")
+      .setGPS("Ferrari Connect Pro")
       .build();
   }
 
-  static buildOfficePC() {
-    return new ComputerBuilder()
-      .setCPU("Intel i5")
-      .setGPU("Integrada Intel UHD")
-      .setRAM("16GB")
-      .setStorage("512GB SSD")
-      .setPowerSupply("500W")
-      .setCase("Mini Tower")
-      .setOS("Windows 11 Home")
+  static buildFamilySUV() {
+    return new CarBuilder()
+      .setBrand("Porsche")
+      .setModel("Cayenne Turbo GT")
+      .setYear("2025")
+      .setEngine("4.0 V8 Biturbo 640cv")
+      .setColor("Chalk Grey")
+      .setGPS("Porsche Communication Management")
       .build();
   }
 
-  static buildLinuxDevPC() {
-    return new ComputerBuilder()
-      .setCPU("AMD Ryzen 7")
-      .setGPU("AMD Radeon RX 7800XT")
-      .setRAM("32GB")
-      .setStorage("1TB SSD")
-      .setPowerSupply("750W")
-      .setCase("Mid Tower")
-      .setOS("Ubuntu Linux")
-      .addWifiCard()
+  static buildRetroCar() {
+    return new CarBuilder()
+      .setBrand("Chevrolet")
+      .setModel("Camaro SS 1969")
+      .setYear("1969 Restomod")
+      .setEngine("LS7 V8 7.0L")
+      .setColor("Hugger Orange")
+      .setGPS("RetroSound Touchscreen")
+      .build();
+  }
+
+  static buildOffRoad() {
+    return new CarBuilder()
+      .setBrand("Land Rover")
+      .setModel("Defender 110 V8")
+      .setYear("2025")
+      .setEngine("5.0 V8 Supercharged")
+      .setColor("Santorini Black")
+      .setGPS("Pivi Pro Terrain Response")
       .build();
   }
 }
 
-// Uso
-const gamer = ComputerDirector.buildGamingPC();
-const office = ComputerDirector.buildOfficePC();
-const dev = ComputerDirector.buildLinuxDevPC();
-const satc = new ComputerBuilder().setCPU("Celeron 400").build();
+// Bulding the Dream Garage For a Millionary 
+const dream = CarDirector.buildDreamCar();
+const FamilySUV = CarDirector.buildFamilySUV();
+const Retro = CarDirector.buildRetroCar();
+const OffRoad = CarDirector.buildOffRoad();
+const Hyper = new CarBuilder()
+  .setBrand("Koenigsegg")
+  .setModel("Jesko Absolut")
+  .setYear("2025")
+  .setEngine("V8 5.0 Biturbo 1600cv")
+  .setColor("Pearl White")
+  .setGPS("Koenigsegg SmartCluster")
+  .build();
 
-gamer.showConfig();
-office.showConfig();
-dev.showConfig();
-//satc.showConfig();
+console.log("*********************************")
+console.log("Montando sua garagem dos sonhos:")
+console.log("*********************************")
+
+dream.showConfig();
+FamilySUV.showConfig();
+Retro.showConfig();
+OffRoad.showConfig();
+Hyper.showConfig();
